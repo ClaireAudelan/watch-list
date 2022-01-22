@@ -12,8 +12,6 @@ url = "http://tmdb.lewagon.com/movie/top_rated"
 movies_serialized = URI.open(url).read
 movies = JSON.parse(movies_serialized)
 
-puts movies["results"]
-
 puts "Cleaning up database"
 Movie.destroy_all
 puts "Database is clean"
@@ -23,7 +21,7 @@ movies["results"].each do |result|
   movie = Movie.create(
     title: result["title"],
     overview: result["overview"],
-    poster_url: result["poster_path"],
+    poster_url: "https://image.tmdb.org/t/p/w500/#{result["poster_path"]}",
     rating: result["vote_average"]
   )
   puts "Movie #{movie.id} is created"
