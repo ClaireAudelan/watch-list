@@ -1,13 +1,34 @@
-<h1>List <%= list.name %></h1>
+<%= render "navbar", list: @list %>
 
-<ul>
-  <% @movies do |list| %>
-    <li>
-      <%= movie.title %>
-      <%= link_to "Delete",
-            bookmark_path(@bookmark),
-            method: :delete,
-            data: { confirm: "Are you sure?" } %>
-    </li>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
+  <div class="container">
+    <h1><%= @list.name %></h1>
+  </div>
+</div>
+
+<div class="container">
+
+
+  <% @movies.each do |movie|%>
+    <div class="card-trip">
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+      <div class="card-trip-infos">
+        <div>
+          <h2><%= movie.title %></h2>
+          <p><%= movie.overview %></p>
+        </div>
+        <%= link_to "Delete",
+              list_path(@list),
+              method: :delete,
+              data: { confirm: "Are you sure?" } %>
+      </div>
+    </div>
+
+
   <% end %>
-</ul>
+
+
+
+  <%= link_to 'Add a movie', new_list_bookmark_path(@list), class: "btn btn-flat" %>
+
+</div>
